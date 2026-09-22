@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PDF Canvas 标注工具</title>
+  </head>
+  <body>
+    <div id="app">
+      <header class="toolbar">
+        <div class="brand">PDF 标注</div>
+        <label class="button primary">
+          打开 PDF
+          <input id="fileInput" type="file" accept="application/pdf,.pdf" hidden />
+        </label>
+
+        <div class="divider"></div>
+
+        <div class="tool-group" role="group" aria-label="标注工具">
+          <button class="button tool active" data-tool="pen" type="button">画笔</button>
+          <button class="button tool" data-tool="highlight" type="button">高亮</button>
+          <button class="button tool" data-tool="text" type="button">文字</button>
+          <button class="button tool" data-tool="eraser" type="button">删除</button>
+        </div>
+
+        <input id="colorPicker" type="color" value="#ff2d2d" aria-label="标注颜色" />
+
+        <div class="divider"></div>
+
+        <button id="zoomOut" class="button" type="button">缩小</button>
+        <span id="zoomLabel" class="zoom-label">100%</span>
+        <button id="zoomIn" class="button" type="button">放大</button>
+        <button id="fitWidth" class="button" type="button">适宽</button>
+
+        <div class="spacer"></div>
+
+        <button id="clearStorage" class="button hidden" type="button">清除缓存</button>
+        <button id="exportPdf" class="button success" type="button" disabled>导出 PDF</button>
+      </header>
+
+      <main class="workspace">
+        <section id="emptyState" class="empty-state">
+          <h1>打开一个 PDF 开始标注</h1>
+          <p>解析与页面渲染在 Web Worker 中完成，标注绘制在 Canvas 覆盖层完成，文件和标注会保存到 IndexedDB。</p>
+          <label class="button primary large">
+            选择 PDF 文件
+            <input id="emptyFileInput" type="file" accept="application/pdf,.pdf" hidden />
+          </label>
+          <div id="recentDocuments" class="recent-documents"></div>
+        </section>
+
+        <section id="viewer" class="viewer hidden" aria-label="PDF 页面列表"></section>
+      </main>
+
+      <footer class="statusbar">
+        <span id="statusText">就绪</span>
+        <span id="pageIndicator"></span>
+      </footer>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
